@@ -2,14 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.IO;
-using System.Collections.Generic;
 using OfficeOpenXml;
-using System.Linq;
-using static System.Net.WebRequestMethods;
 
 namespace AplicacionExcelsTomi
 {
@@ -20,9 +13,7 @@ namespace AplicacionExcelsTomi
             // Aceptar la licencia de EPPlus
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            string carpetaMain = @"D:\PLANILLAS_TOMI\";
-            //string carpetaExcel = @"D:\PLANILLAS_TOMI\TALLES SANI 25\"; // Cambia esto
-            //string archivoSalida = @"D:\PLANILLAS_TOMI\TALLES SANI 25.csv"; // Salida
+            string carpetaMain = @"D:\PLANILLAS_TOMI\"; // Harcodeado
 
             List<string[]> datosExtraidos = new List<string[]>();
             datosExtraidos.Add(new string[] { "NOMBRE Y APELLIDO", "WPP/CELULAR", "COLEGIO Y CURSO" }); // Encabezado
@@ -93,6 +84,7 @@ namespace AplicacionExcelsTomi
             // Guardar en CSV
             System.IO.File.WriteAllLines(archivoSalida, datosExtraidos.Select(d => string.Join(",", d)));
             //Console.WriteLine($"Datos extraídos correctamente en {archivoSalida}");
+            // Convertir a xlsx
             ConvertCsvToXlsx(archivoSalida, archivoXlsx);
             System.IO.File.Delete(archivoSalida);
             Console.WriteLine($"XLSX creado en {archivoXlsx}");
